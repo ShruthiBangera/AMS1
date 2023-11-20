@@ -1,0 +1,49 @@
+<div class="container" *ngIf="objDOHome">
+  <div class="col-md-4 col-sm-6 d-inline-block pe-5 mb-4">
+    <label for="inputEmail3">Vendor Name</label>
+    <select class="form-control" id="ddlAdmVendorId" [(ngModel)]="objDOHome.AdmVendorId" disabled>
+      <option [value]="null">--Select Vendor--</option>
+      <option *ngFor="let vendor of objDOHome.LstVendor" [value]="vendor.AdmVendorId">{{vendor.VendorName}}</option>
+    </select>
+  </div>
+  <div class="col-md-4 col-sm-6 d-inline-block pe-5 mb-4">
+    <label for="lblProjectName">Project Name</label>
+    <input type="text" class="form-control" id="txtProjectName" placeholder="ProjectName" [(ngModel)]="objDOHome.ProjectName" disabled>
+  </div>
+  <div class="col-md-4 col-sm-6 d-inline-block pe-5 mb-4">
+    <label for="lblAdmProjectManagerId">Project Manager Name</label>
+    <select class="form-control" id="ddlAdmProjectManagerId" [(ngModel)]="objDOHome.AdmProjectManagerId" disabled>
+      <option [value]="null">--Select Project Manager--</option>
+      <option *ngFor="let projMgr of objDOHome.LstProjectManager" [value]="projMgr.AdmProjectManagerId">{{projMgr.ProjectManagerName}}</option>
+    </select>
+  </div>
+  <!--<div class="col-md-4 col-sm-6 d-inline-block pe-5 mb-4">
+    <label for="lblMonthNum">Month </label>
+    <select class="form-control" id="ddlMonthNum" [(ngModel)]="objDOHome.MonthNum">
+      <option [value]="0">--Select Month--</option>
+      <option *ngFor="let month of objDOHome.LstMonths" [value]="month.MonthNum">{{month.Month}}</option>
+    </select>
+  </div>-->
+  <div class="col-md-4 col-sm-6 d-inline-block pe-5 mb-4">
+    <label for="lblProjectName">Date</label>
+    <input type="date" class="form-control" id="txtDate" name="AttendanceDate" [(ngModel)] ="objAttendance.AttendanceDate">
+  </div>
+  <div class="col-md-4 col-sm-6 d-inline-block pe-5 mb-4">
+    <label for="lblProjectName">Time In</label>
+    <input type="time" class="form-control" id="txtTimeIn" [(ngModel)]="objAttendance.LoggedInTime">
+  </div>
+  <div class="col-md-4 col-sm-6 d-inline-block pe-5 mb-4">
+    <label for="lblProjectName">Time Out</label>
+    <input type="time" class="form-control" id="txtTimeOut" [(ngModel)]="objAttendance.LoggedOutTime">
+  </div>
+  <div class="col-md-4 col-sm-6 d-inline-block pe-5 mb-4">
+    <label for="lblProjectName">Activity</label>
+    <input type="text" class="form-control" id="txtActivity" [(ngModel)]="objAttendance.Activity">
+  </div>
+  <div class="clearfix"></div>
+  <div class="bg-light clearfix mt-2 float-end" role="group" style="display: inline-flex;">
+    <button id="btnAdd" name="btnAdd" class="btn btn-m btn-primary btn-login fw-bold mb-2 float-end" style="margin-right: 10px;" (click)="fnAdd()" *ngIf="!IsEdit">Add</button>
+    <button id="btnAdd" name="btnAdd" class="btn btn-m btn-primary btn-login fw-bold mb-2 float-end" style="margin-right: 10px;" (click)="fnEdit()" *ngIf="IsEdit">Update</button>
+    <button id="btnCancel" name="btnCancel" class="btn btn-m btn-primary btn-login fw-bold mb-2 float-end" (click)="fnCancel()">Cancel</button>
+  </div>
+</div>

@@ -1,0 +1,90 @@
+<!--<h4 id="tableLabel">Attendance Details</h4>-->
+<div class="clearfix"></div>
+<div class="container" *ngIf="objDOHome">
+  <fieldset class="border rounded-3 p-3">
+    <legend class="float-none w-auto px-3 font-legend">Search</legend>
+    <!--<form >-->
+    <section>
+      <div class="col-md-6 col-sm-6 d-inline-block pe-5 mb-4">
+        <label for="inputEmail3">Vendor Name</label>
+        <select class="form-control" id="ddlAdmVendorId" [(ngModel)]="objDOHome.AdmVendorId" disabled>
+          <option [value]="null">--Select Vendor--</option>
+          <option *ngFor="let vendor of objDOHome.LstVendor" [value]="vendor.AdmVendorId">{{vendor.VendorName}}</option>
+        </select>
+      </div>
+
+      <div class="col-md-6 col-sm-6 d-inline-block pe-5 mb-4">
+        <label for="lblProjectName">Project Name</label>
+        <input type="text" class="form-control" id="txtProjectName" placeholder="ProjectName" [(ngModel)]="objDOHome.ProjectName" disabled>
+      </div>
+
+      <div class="col-md-6 col-sm-6 d-inline-block pe-5 mb-4">
+        <label for="lblAdmProjectManagerId">Project Manager Name</label>
+        <select class="form-control" id="ddlAdmProjectManagerId" [(ngModel)]="objDOHome.AdmProjectManagerId" disabled>
+          <option [value]="null">--Select Project Manager--</option>
+          <option *ngFor="let projMgr of objDOHome.LstProjectManager" [value]="projMgr.AdmProjectManagerId">{{projMgr.ProjectManagerName}}</option>
+        </select>
+      </div>
+
+      <div class="col-md-6 col-sm-6 d-inline-block pe-5 mb-4">
+        <label for="lblMonthNum">Month </label>
+        <select class="form-control" id="ddlMonthNum" [(ngModel)]="objDOHome.MonthNum">
+          <option [value]="0">--Select Month--</option>
+          <option *ngFor="let month of objDOHome.LstMonths" [value]="month.MonthNum">{{month.Month}}</option>
+        </select>
+      </div>
+      <div class="clearfix"></div>
+      <div class="bg-light clearfix mt-2 float-end" style="display: inline-flex;" role="group">
+        <button class="btn btn-m btn-primary btn-login fw-bold mb-2 float-end" style="margin-right: 10px;" (click)="fnSearch(objDOHome.MonthNum)">Search</button>
+        <button class="btn btn-m btn-primary btn-login fw-bold mb-2 float-end" style="margin-right: 10px;" (click)="fnReset()">Reset</button>
+        <button class="btn btn-m btn-primary btn-login fw-bold mb-2 float-end" (click)="fnAdd()">Add</button>
+      </div>
+    </section>
+  </fieldset>
+
+ 
+  <!--</form>-->
+  <div class="row pt-4">
+    <div class="col-sm-12">
+      <div class="panel panel-default mb-4 border">
+        <div class="panel-heading">
+          Search Results
+        </div>
+        <div class="panel-body">
+          <table class='table table-striped border' aria-labelledby="tableLabel">
+            <thead>
+              <tr>
+                <th >Action</th>
+                <th>Date</th>
+                <th>Time In</th>
+                <th>Time Out</th>
+                <th>Activity</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="objDOHome.LstAttendanceDetails && objDOHome.LstAttendanceDetails.length > 0; else Nodata">
+              <tr *ngFor="let attendance of objDOHome.LstAttendanceDetails">
+                <td>
+                  <!--<a href="" (click)="fnEdit(attendance.TrnAttendanceDetailId)" class="btn btn-primary" style="margin-right: 5px;"><i class="fa fa-edit"></i></a>
+                  <a href="" (click)="fnDelete(attendance.TrnAttendanceDetailId)" class="btn btn-danger"><i class="fa fa-trash"></i></a>-->
+                  <button (click)="fnEdit(attendance.TrnAttendanceDetailId)" class="btn btn-primary" style="margin-right: 5px;"><i class="fa fa-edit"></i></button>
+                  <button (click)="fnDelete(attendance.TrnAttendanceDetailId)" class="btn btn-danger"><i class="fa fa-trash"></i></button>>
+                </td>
+                <td>{{ attendance.AttendanceDateStr }}</td>
+                <td>{{ attendance.LoggedInTimeStr }}</td>
+                <td>{{ attendance.LoggedOutTimeStr }}</td>
+                <td>{{ attendance.Activity }}</td>
+              </tr>
+            </tbody>
+            <ng-template #Nodata>
+              <tbody>
+                <tr>
+                  <td colspan="4">No Data found</td>
+                </tr>
+              </tbody>
+            </ng-template>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
